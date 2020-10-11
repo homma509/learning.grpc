@@ -2,19 +2,20 @@ package main
 
 import (
 	"context"
-	"errors"
 	"log"
 	"net"
 
 	pb "github.com/homma509/learning.grpc"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 type server struct{}
 
 func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
 	log.Printf("Receive: %v", in.Name)
-	return nil, errors.New("test error")
+	return nil, status.New(codes.NotFound, "resource not found").Err()
 }
 
 func main() {
