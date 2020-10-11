@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"errors"
 	"log"
 	"net"
 
@@ -13,7 +14,7 @@ type server struct{}
 
 func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
 	log.Printf("Receive: %v", in.Name)
-	return &pb.HelloReply{Message: "Hello " + in.Name}, nil
+	return nil, errors.New("test error")
 }
 
 func main() {
