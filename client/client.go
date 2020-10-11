@@ -4,9 +4,11 @@ import (
 	"context"
 	"log"
 	"os"
+	"time"
 
 	pb "github.com/homma509/learning.grpc"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/metadata"
 )
 
 func main() {
@@ -21,6 +23,8 @@ func main() {
 	name := os.Args[1]
 
 	ctx := context.Background()
+	md := metadata.Pairs("timestamp", time.Now().Format(time.Stamp))
+	ctx = metadata.NewOutgoingContext(ctx, md)
 	r, err := c.SayHello(ctx, &pb.HelloRequest{Name: name})
 	if err != nil {
 		log.Fatalf("could not greet: %v", err)
