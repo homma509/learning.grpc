@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	addr := "localhost:50001"
+	addr := "localhost:50051"
 	conn, err := grpc.Dial(addr, grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
